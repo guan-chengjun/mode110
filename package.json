@@ -1,0 +1,22 @@
+{
+  "name": "solar-system-sim",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "基于 Three.js + Vite + TypeScript 的太阳系行星轨道 3D 仿真",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node scripts/smoke-test.mjs"
+  },
+  "dependencies": {
+    "three": "^0.171.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.171.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.7"
+  }
+}

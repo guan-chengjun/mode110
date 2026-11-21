@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>太阳系行星轨道 3D 仿真</title>
+  </head>
+  <body>
+    <!-- Three.js 画布挂载点 -->
+    <div id="scene-container"></div>
+
+    <!-- GLB 模型加载提示（内嵌状态条，非弹窗） -->
+    <div id="loading" class="loading hidden">
+      <div class="loading-spinner"></div>
+      <span id="loading-text">正在加载资源…</span>
+    </div>
+
+    <!-- 左下角：选中天体信息面板 -->
+    <aside id="info-panel" class="panel hidden">
+      <h3 id="info-name">—</h3>
+      <dl>
+        <dt>天体类型</dt>
+        <dd id="info-type">—</dd>
+        <dt>公转速度</dt>
+        <dd id="info-orbit-speed">—</dd>
+        <dt>自转速度</dt>
+        <dd id="info-spin-speed">—</dd>
+        <dt>距太阳距离</dt>
+        <dd id="info-distance">—</dd>
+      </dl>
+    </aside>
+
+    <!-- 右上角：精简控制面板 -->
+    <section id="control-panel" class="panel">
+      <h2>仿真控制</h2>
+
+      <label class="row">
+        时间流速
+        <input id="speed-slider" type="range" min="0" max="10" step="0.1" value="1" />
+        <span id="speed-value" class="mono">1.0×</span>
+      </label>
+
+      <div class="btn-row">
+        <button id="btn-pause" type="button">暂停</button>
+        <button id="btn-reset" type="button">重置位置</button>
+      </div>
+
+      <label class="row checkbox">
+        <input id="chk-orbits" type="checkbox" checked />
+        显示轨道线
+      </label>
+      <label class="row checkbox">
+        <input id="chk-comet" type="checkbox" checked />
+        显示彗星与拖尾
+      </label>
+
+      <label class="row">
+        选中天体
+        <select id="body-select">
+          <option value="">— 点击场景或下拉选择 —</option>
+        </select>
+      </label>
+
+      <p class="tip">鼠标拖拽旋转视角 · 滚轮缩放 · 点击天体选中</p>
+    </section>
+
+    <!-- 非阻塞 toast：模型加载失败等提示 -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

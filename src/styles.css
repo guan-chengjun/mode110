@@ -1,0 +1,225 @@
+/* ========== 全局基础 ========== */
+:root {
+  --panel-bg: rgba(10, 16, 32, 0.78);
+  --panel-border: rgba(120, 160, 255, 0.25);
+  --text-main: #e8eeff;
+  --text-dim: #93a0bd;
+  --accent: #6ea8ff;
+  --accent-warm: #ffb45e;
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #02030a;
+  color: var(--text-main);
+}
+
+#scene-container {
+  position: fixed;
+  inset: 0;
+}
+
+#scene-container canvas {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.mono {
+  font-family: 'Cascadia Code', Consolas, monospace;
+}
+
+/* ========== 浮动面板通用样式 ========== */
+.panel {
+  position: fixed;
+  z-index: 10;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  user-select: none;
+}
+
+#control-panel {
+  top: 16px;
+  right: 16px;
+  width: 264px;
+}
+
+#control-panel h2,
+#info-panel h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.row.checkbox {
+  color: var(--text-main);
+}
+
+.row input[type='range'] {
+  flex: 1;
+  accent-color: var(--accent);
+}
+
+.row select {
+  flex: 1;
+  background: rgba(20, 30, 55, 0.9);
+  color: var(--text-main);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 12px;
+  outline: none;
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+button {
+  flex: 1;
+  padding: 7px 0;
+  background: rgba(110, 168, 255, 0.16);
+  color: var(--text-main);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s ease;
+}
+
+button:hover {
+  background: rgba(110, 168, 255, 0.32);
+}
+
+.tip {
+  margin: 10px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+/* ========== 左下信息面板 ========== */
+#info-panel {
+  left: 16px;
+  bottom: 16px;
+  min-width: 220px;
+}
+
+#info-panel dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  margin: 0;
+  font-size: 12.5px;
+}
+
+#info-panel dt {
+  color: var(--text-dim);
+}
+
+#info-panel dd {
+  margin: 0;
+  text-align: right;
+  font-family: 'Cascadia Code', Consolas, monospace;
+  color: var(--text-main);
+}
+
+/* ========== 加载提示 ========== */
+.loading {
+  position: fixed;
+  z-index: 20;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.loading-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========== 非阻塞 toast ========== */
+.toast {
+  position: fixed;
+  z-index: 30;
+  left: 50%;
+  bottom: 36px;
+  transform: translateX(-50%);
+  max-width: min(560px, 80vw);
+  padding: 10px 18px;
+  background: rgba(40, 24, 12, 0.92);
+  border: 1px solid rgba(255, 180, 94, 0.5);
+  border-radius: 8px;
+  color: #ffd9a8;
+  font-size: 12.5px;
+  line-height: 1.5;
+  animation: toast-in 0.25s ease;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+}
+
+/* ========== 窄屏自适应 ========== */
+@media (max-width: 640px) {
+  #control-panel {
+    width: calc(100vw - 32px);
+    top: 8px;
+    right: 16px;
+  }
+
+  #info-panel {
+    min-width: 0;
+    width: calc(100vw - 32px);
+  }
+}
